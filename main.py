@@ -186,7 +186,7 @@ def delete_student(student_id):
 
     :param student_id: int that represents the student's id
     """
-    mycursor.execute("DELETE FROM Student WHERE StudentId = " + str(student_id))
+    mycursor.execute("UPDATE Student SET isDeleted = 1 WHERE StudentID = ?", (student_id,))
     conn.commit()
 
 def update_student(student_id, major, faculty_advisor, mobile_phone_number):
@@ -240,8 +240,9 @@ conn = sqlite3.connect('Students.db')
 mycursor = conn.cursor()
 
 #Creates table in the database and imports data from csv file.
-create_table()
-import_data()
+#create_table()
+#import_data()
+
 
 #Checks if the user has pressed 'q' to exit.
 hasExited = False
